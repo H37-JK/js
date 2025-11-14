@@ -57,7 +57,7 @@ for(let i = 1; i <= 100; i ++) {
 
 function getKSTTimeString() {
     const date = new Date();
-    // 9시간 더하기: 1시간=3600000ms, 9*3600000=32400000ms
+    // 9시간 더하기: 1시간=3600000ms, 9*3600000=324000000ms
     const kst = new Date(date.getTime() + 9 * 60 * 60 * 1000);
 
     const yyyy = kst.getUTCFullYear();
