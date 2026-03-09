@@ -1,7 +1,7 @@
 import puppeteer from "puppeteer";
 
 const browser = await puppeteer.launch({
-    headless: true,
+    headless: false,
     args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-save-password-bubble']
 });
 

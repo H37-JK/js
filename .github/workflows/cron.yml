@@ -36,14 +36,8 @@ jobs:
       - name: Install NPM packages
         run: npm install
 
-      # 5단계: 내 자바스크립트 파일 실행
-      - name: Run my script
-        run: node on.js
-#
-#      # (선택) 6단계: 결과물 업로드
-#      # 스크립트 실행으로 생성된 파일(예: 스크린샷)을 확인하고 싶을 때 사용
-#      - name: Upload artifacts
-#        uses: actions/upload-artifact@v4
-#        with:
-#          name: naver-screenshot
-#          path: naver_screenshot.png
+      - name: Run scripts in parallel
+        run: |
+          node on.js &
+          node jo.js &
+          wait
