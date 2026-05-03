@@ -55,13 +55,13 @@ console.log('페이지이동')
 // #frm > table > tbody > tr:nth-child(4) > td:nth-child(1) > input
 await delay(2000)
 
-//await page.click('body > div.top_info > div > ul > li:nth-child(1) > a')
-//await delay(1000)
-//await page.click('body > div.top_info > div > ul > div.myinfo_popup.myInfoLayer > ul.myinfo_box > input.mypage_btn');
-//await delay(1000)
-//await page.click('body > div.main_wrap > div.main_list2 > ul.mytop_tab > li:nth-child(2) > a');
-//body > div.main_wrap > div.main_list2 > ul.mytop_tab > li:nth-child(2) > a
-await page.goto('https://extra.filejo.com/main/mypage.php?doc=seller')
+await page.click('body > div.top_info > div > ul > li:nth-child(1) > a')
+await delay(1000)
+await page.click('body > div.top_info > div > ul > div.myinfo_popup.myInfoLayer > ul.myinfo_box > input.mypage_btn');
+await delay(1000)
+await page.click('body > div.main_wrap > div.main_list2 > ul.mytop_tab > li:nth-child(2) > a');
+
+//await page.goto('https://extra.filejo.com/main/mypage.php?doc=seller')
 await delay(1000)
 await page.click('#sellerContentsMenu');
 await delay(1000)
