@@ -59,7 +59,8 @@ await page.click('body > div.top_info > div > ul > li:nth-child(1) > a')
 await delay(1000)
 await page.click('body > div.top_info > div > ul > div.myinfo_popup.myInfoLayer > ul.myinfo_box > input.mypage_btn');
 await delay(1000)
-await page.click('body > div.main_wrap > div.main_list2 > ul.mytop_tab > li:nth-child(2) > a');
+await page.click('body > div.main_wrap > div.main_list2 > ul.mytop_tab_event > li:nth-child(2) > a');
+
 await delay(1000)
 await page.click('#sellerContentsMenu');
 await delay(1000)
