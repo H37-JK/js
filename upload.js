@@ -1,11 +1,15 @@
 import { chromium } from "playwright";
 
-const browser = await chromium.launch({
-    headless: false,
-    args: ['--no-sandbox']
-});
+// const browser = await chromium.launch({
+//     headless: false,
+//     args: ['--no-sandbox']
+// });
 
-let page = await browser.newPage();
+const browser = await chromium.connectOverCDP('http://localhost:9222');
+const defaultContext = browser.contexts()[0];
+let page = defaultContext.pages()[0];
+
+
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 page.on('dialog', async dialog => {
@@ -37,6 +41,12 @@ page.on('dialog', async dialog => {
 //     }
 // });
 
+page.on('dialog', async dialog => {
+    console.log('Dialog detected:', dialog.message());
+    await dialog.accept();
+    await delay(2000);
+});
+
 await page.goto('https://extra.filejo.com/');
 
 await page.setExtraHTTPHeaders({
@@ -54,37 +64,10 @@ await page.fill('#mb_id', 'star2098')
 await page.fill('#mb_pw', 'star8903')
 await delay(1000)
 await page.click('body > div.main_loginbox > ul > div.layerLogin > ul.login_inputbox > li:nth-child(5) > input')
+await delay(2000)
+await page.click('body > div.top_nav > ul > li:nth-child(11) > a')
 
-await page.click('body > div.top_info > div > ul > li:nth-child(1) > a');
-await delay(1000);
-await page.click('body > div.top_info > div > ul > div.myinfo_popup.myInfoLayer > ul.myinfo_box > input.mypage_btn');
-await delay(1000);
-await page.click('body > div.main_wrap > div.main_list2 > ul.mytop_tab > li:nth-child(2) > a');
+await page.click('#list_sort > ul.ttl2 > li > div > div:nth-child(7) > input')
+await page.click('body > form > div.popupbox1 > div > div > ul > li.fileup_3bl_b > div.fileup_li03 > input.fileup_btn001')
 
-await delay(1000);
-await page.click('#sellerContentsMenu');
-await delay(1000);
 
-for(let i = 1; i <= 100; i ++) {
-    console.log('시작');
-    if (i === 1) {
-        await delay(3000);
-    } else {
-        await delay(610000);
-    }
-
-    console.log(getCurrentTimeString() + ':' + `${i}번째 실행`);
-    await page.click('#mypageInfoArea > ul.list006 > li:nth-child(15) > div.ttl001 > input');
-    await page.click('#mypageInfoArea > ul.mypminibar > ul.minibar02 > li:nth-child(3) > input[type=button]');
-}
-
-function getCurrentTimeString() {
-    const date = new Date();
-    const yyyy = date.getFullYear();
-    const mm = String(date.getMonth() + 1).padStart(2, '0');
-    const dd = String(date.getDate()).padStart(2, '0');
-    const hh = String(date.getHours()).padStart(2, '0');
-    const min = String(date.getMinutes()).padStart(2, '0');
-    const ss = String(date.getSeconds()).padStart(2, '0');
-    return `${yyyy}-${mm}-${dd} ${hh}:${min}:${ss}`;
-}
