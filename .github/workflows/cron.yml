@@ -3,8 +3,16 @@ name: 배치 프로세스
 
 # 이 워크플로우를 언제 실행할지 결정하는 트리거
 on:
-
+  # 5시간마다 자동 실행 (UTC 0, 5, 10, 15, 20시 = 한국시간 9, 14, 19, 24, 5시)
+  schedule:
+    - cron: '0 */5 * * *'
   workflow_dispatch:
+
+# 새 실행이 시작되면 아직 돌고 있는 이전 실행은 취소 (중복 로그인 방지)
+concurrency:
+  group: batch-process
+  cancel-in-progress: true
+
 jobs:
   run-script:
     # 이 작업을 실행할 가상 컴퓨터의
